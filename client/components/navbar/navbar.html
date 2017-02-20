@@ -1,7 +1,7 @@
-<nav class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+<nav class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl as ctrl">
    <div class="container-fluid">
       <div class="navbar-header">
-         <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+         <button class="navbar-toggle" type="button" ng-click="ctrl.isCollapsed = !ctrl.isCollapsed">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -9,50 +9,50 @@
          </button>
          <a data-ui-sref="main" class="navbar-brand">ASR</a>
       </div>
-      <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <div collapse="ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
          <ul class="nav navbar-nav">
-            <li data-ui-sref-active="active" ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-               <a data-ui-sref="{{item.link}}(getDateParams())">{{item.title}}</a>
+            <li data-ui-sref-active="active" ng-repeat="item in ctrl.menu" ng-class="{active: ctrl.isActive(item.link)}">
+               <a data-ui-sref="{{item.link}}(ctrl.getDateParams())">{{item.title}}</a>
             </li>
-            <li ng-show="isAdmin()" data-ui-sref-active="active"><a data-ui-sref="admin">Admin</a></li>
+            <li ng-show="ctrl.isAdmin()" data-ui-sref-active="active"><a data-ui-sref="admin">Admin</a></li>
          </ul>
 
-         <form class="navbar-form navbar-left" ng-show="showPickers()">
-            <div class="form-group has-feedback" data-ng-click="tooglePicker('startOpen')">
+         <form class="navbar-form navbar-left" ng-show="ctrl.showPickers()">
+            <div class="form-group has-feedback" data-ng-click="ctrl.tooglePicker('startOpen')">
                <input class="form-control"
                   type="text"
                   data-uib-datepicker-popup="yyyy-MM-dd"
                   data-show-button-bar="false"
-                  data-ng-model="startDate"
+                  data-ng-model="ctrl.startDate"
                   data-is-open="startOpen"
-                  data-max-date="endDate"/>
+                  data-max-date="ctrl.endDate"/>
                <span class="glyphicon glyphicon-calendar form-control-feedback"  aria-hidden="true"></span>
             </div>
-            <div class="form-group has-feedback" data-ng-click="tooglePicker('endOpen')">
+            <div class="form-group has-feedback" data-ng-click="ctrl.tooglePicker('endOpen')">
                <input class="form-control"
                   type="text"
                   data-uib-datepicker-popup="yyyy-MM-dd"
                   data-show-button-bar="false"
-                  data-ng-model="endDate"
+                  data-ng-model="ctrl.endDate"
                   data-is-open="endOpen"
-                  data-max-date="maxDate"
-                  data-min-date="startDate"/>
+                  data-max-date="ctrl.maxDate"
+                  data-min-date="ctrl.startDate"/>
                <span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
             </div>
             <div class="form-group has-feedback">
                <select class="form-control has-feedback"
-                  ng-model="site"
-                  ng-options="site.name for site in sites">
+                  ng-model="ctrl.tags"
+                  ng-options="name for tag in tags">
                </select>
             </div>
          </form>
 
          <ul class="nav navbar-nav navbar-right">
-            <!-- <li ng-hide="isLoggedIn()" data-ui-sref-active="active"><a data-ui-sref="signup">Sign up</a></li> -->
-            <li ng-hide="isLoggedIn()" data-ui-sref-active="active"><a data-ui-sref="login">Login</a></li>
-            <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
-            <li ng-show="isLoggedIn()" data-ui-sref-active="active"><a data-ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-            <li ng-show="isLoggedIn()"><a data-ui-sref="main" ng-click="logout()">Logout</a></li>
+            <!-- <li ng-hide="ctrl.isLoggedIn()" data-ui-sref-active="active"><a data-ui-sref="signup">Sign up</a></li> -->
+            <li ng-hide="ctrl.isLoggedIn()" data-ui-sref-active="active"><a data-ui-sref="login">Login</a></li>
+            <li ng-show="ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ ctrl.getCurrentUser().name }}</p> </li>
+            <li ng-show="ctrl.isLoggedIn()" data-ui-sref-active="active"><a data-ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+            <li ng-show="ctrl.isLoggedIn()"><a data-ui-sref="main" ng-click="ctrl.logout()">Logout</a></li>
          </ul>
 
       </div>
